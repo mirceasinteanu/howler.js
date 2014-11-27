@@ -599,10 +599,10 @@
       var self = this;
 
       // if the sound hasn't been loaded, add it to the event queue
+      var stopSound = self.stop.bind(self, id);
+      self.off('play', stopSound)
       if (!self._loaded) {
-        self.on('play', function() {
-          self.stop(id);
-        });
+        self.on('play', stopSound);
 
         return self;
       }
